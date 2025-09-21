@@ -16,19 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from pedidos.views import ClienteViewSet, ProdutoViewSet, PedidoViewSet
-from pedidos import views
-
-router = DefaultRouter()
-router.register(r'clientes', ClienteViewSet)
-router.register(r'produtos', ProdutoViewSet)
-router.register(r'pedidos', PedidoViewSet)
+from pedidos_app import views  # Corrigido: era pedidos.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls)),
-	path('listar/', views.listar_pedidos, name='listar_pedidos'),
-	path('dashboard/', views.status_dashboard, name='status_dashboard'),
-	path('api/pedidos', include('pedidos_app.urls')), 
+    path('api/', include('pedidos.urls')),  # Se existir
+    path('listar/', views.listar_pedidos, name='listar_pedidos'),
+	path('api/pedidos', include('pedidos_app.urls')),
+    # Adicione outras rotas conforme necessário
 ]
+

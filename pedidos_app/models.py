@@ -4,9 +4,12 @@ from transportadoras.models import Transportadora
 
 # Create your models here.
 
+class Cliente(models.Model):
+	id_cliente = models.AutoField(primary_key=True)
+	
 class Pedido(models.Model):
 	STATUS_CHOICES = [
-		('ABERTO,' 'Em Aberto'),
+		('ABERTO', 'Em Aberto'),
 		('FABRICANDO', 'Em Fabricação'),
 		('PRONTO', 'Pedido Pronto'),
 		('TRANSPORTE', 'Em Transporte'),
@@ -14,8 +17,9 @@ class Pedido(models.Model):
 		('CANCELADO', 'Cancelado'),		
 	]
 
-	numero = models.CharField(max_length=100, null=True, blank=True, unique=True)
-	cliente = models.CharField(max_length=255, null=False, blank=False)
+	id_ped = models.AutoField(primary_key=True)
+	numero_ped = models.CharField(max_length=100, null=True, blank=True, unique=True)
+	cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
 	data_pedido = models.DateField(null=True, blank=True)
 	fornecedor = models.ForeignKey(Fornecedor, on_delete=models.SET_NULL, null=True, blank=True)
 	status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='ABERTO')
