@@ -11,7 +11,7 @@ class ClienteAdmin(admin.ModelAdmin):
 
 @admin.register(Produto)
 class ProdutoAdmin(admin.ModelAdmin):
-	list_display = ('id', 'nome', 'sku', 'valor_unitario', 'tiny_id')
+	list_display = ('id', 'nome', 'sku', 'tiny_id')
 	search_fields = ('nome', 'sku', 'tiny_id')
 
 class PedidoItemInline(admin.TabularInline):
